@@ -1,1 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Priyanshi 🐱💗</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Quicksand:wght@500;700&family=Noto+Sans+Gujarati:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ============ COLORS & FONTS — edit here ============ */
+:root{
+  --bg1:#1d1033; --bg2:#3a1a5c; --pink:#ff8fb8; --pink2:#ffd1e3; --lav:#c9b3ff;
+  --cream:#fff6ec; --ink:#4a2a5a; --cookie:#c98a4b;
+  --hand:'Caveat','Segoe Print','Bradley Hand',cursive;
+  --body:'Quicksand','Segoe UI',system-ui,sans-serif;
+}
+*
+{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--body);color:var(--cream);background:radial-gradient(circle at 50% 0%,var(--bg2),var(--bg1) 70%)}
+#bar{position:fixed;top:0;left:0;right:0;height:5px;background:#ffffff18;z-index:20;padding-top:env(safe-area-inset-top)}
+#bar i{display:block;height:5px;width:0;background:linear-gradient(90deg,var(--pink),var(--lav));border-radius:0 4px 4px 0;transition:width .6s}
+#bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+#bg span{position:absolute;bottom:-40px;opacity:.35;animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-115vh) rotate(40deg)}}
+.screen{position:fixed;inset:0;padding:calc(28px + env(safe-area-inset-top)) 18px calc(28px + env(safe-area-inset-bottom));overflow-y:auto;overflow-x:hidden;display:none;flex-direction:column;align-items:center;text-align:center;z-index:5}
+.screen.on{display:flex;animation:in .6s ease}
+.screen>.in{margin:auto 0;width:100%;max-width:440px}
+@keyframes in{from{opacity:0;transform:translateY(24px) scale(.97)}}
+h1,h2{font-family:var(--hand);font-weight:700;line-height:1.05;margin:10px 0}
+h1{font-size:clamp(40px,11vw,60px);color:var(--pink2)} h2{font-size:clamp(32px,8.5vw,44px);color:var(--pink2)}
+p.sub{opacity:.85;margin:6px 0 16px;font-size:16px;line-height:1.5}
+.cat{display:inline-block;width:150px;animation:bob 2.4s ease-in-out infinite}
+.cat.sm{width:90px}
+@keyframes bob{50%{transform:translateY(-8px) rotate(2deg)}}
+.btn{display:block;width:100%;margin:10px 0;padding:16px 20px;border:0;border-radius:999px;font:700 17px var(--body);color:#fff;background:linear-gradient(135deg,#ff6fa5,#a66bff);box-shadow:0 8px 24px #ff6fa555;cursor:pointer;transition:transform .15s}
+.btn:active{transform:scale(.94)} .btn:hover{transform:translateY(-2px)}
+.btn.alt{background:#ffffff18;box-shadow:none;border:1.5px solid #ffffff44}
+.btn.cookie{background:radial-gradient(circle at 30% 30%,#e3a866,var(--cookie));color:#4a2a12}
+.toast{min-height:26px;font-family:var(--hand);font-size:26px;color:var(--pink);margin:8px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.card{padding:16px 10px;border-radius:22px;background:#ffffff12;border:1.5px solid #ffffff2e;cursor:pointer;transition:.3s;font-weight:700}
+.card b{display:block;font-size:34px;margin-bottom:4px} .card small{opacity:.75;font-weight:500}
+.card.sel{background:linear-gradient(135deg,#ff6fa5aa,#a66bffaa);transform:scale(1.06) rotate(-2deg);border-color:#fff}
+.pol{background:#fff;color:var(--ink);padding:12px 12px 16px;border-radius:6px;box-shadow:0 12px 30px #0006;position:relative;transform:rotate(var(--r,-3deg))}
+.pol .ph{aspect-ratio:4/5;border-radius:3px;background:linear-gradient(135deg,var(--pink2),var(--lav));display:flex;align-items:center;justify-content:center;font-size:56px;overflow:hidden}
+.pol img{width:100%;height:100%;object-fit:contain;background:#fff5fa;display:block} /* contain = never crops badly */
+.pol .cap{font-family:var(--hand);font-size:24px;margin-top:8px}
+.pol:after{content:"";position:absolute;top:-12px;left:50%;width:80px;height:24px;margin-left:-40px;background:#ffe6a8bb;transform:rotate(-4deg)}
+.guj{font:700 26px/1.4 'Noto Sans Gujarati',var(--body);color:var(--pink2);margin:18px 0 4px;text-shadow:0 0 18px #ff8fb8aa}
+.collage{display:grid;grid-template-columns:1fr 1fr;gap:22px 14px;margin:18px 6px}
+.collage .pol:nth-child(3){grid-column:1/-1;width:60%;margin:0 auto}
+.collage .pol .ph{font-size:36px}
+.list{text-align:left;margin:14px 0}
+.list div{padding:12px 14px;margin:8px 0;border-radius:16px;background:#ffffff14;animation:in .5s both}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0}
+.chip{padding:10px 16px;border-radius:999px;background:#ffffff14;border:1.5px solid #ffffff33;cursor:pointer;font-weight:700;transition:.2s}
+.chip.sel{background:var(--pink);color:#3a1a5c;transform:scale(1.08)}
+.player{background:#ffffff14;border-radius:26px;padding:20px;margin:16px 0}
+.player.play .cat{animation:dance .5s ease-in-out infinite}
+@keyframes dance{25%{transform:rotate(-8deg) translateY(-6px)}75%{transform:rotate(8deg) translateY(-6px)}}
+.player input{width:70%;accent-color:var(--pink)}
+.round{width:64px;height:64px;font-size:26px;border-radius:50%;border:0;background:var(--pink);cursor:pointer;margin:10px}
+/* envelope */
+.env{position:relative;width:250px;height:170px;margin:26px auto;background:#f6c1d6;border-radius:8px;box-shadow:0 14px 30px #0006;cursor:pointer;animation:bob 2.6s ease-in-out infinite}
+.env:before{content:"";position:absolute;inset:0;border-radius:8px;background:linear-gradient(150deg,transparent 49%,#f2a8c4 50%) left/50% 100% no-repeat,linear-gradient(210deg,transparent 49%,#f2a8c4 50%) right/50% 100% no-repeat}
+.env .flap{position:absolute;top:0;left:0;right:0;height:95px;background:#ee94b5;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s}
+.env .seal{position:absolute;left:50%;top:70px;margin-left:-22px;width:44px;height:44px;border-radius:50%;background:#e0245e;display:flex;align-items:center;justify-content:center;font-size:22px;z-index:2;transition:.4s}
+.env.open .flap{transform:rotateX(180deg)} .env.open .seal{opacity:0;transform:scale(2)}
+#letter{display:none;width:100%;max-width:480px}
+.paper{background:var(--cream);color:#3b2a3f;border-radius:18px;padding:34px 24px 30px;text-align:left;box-shadow:0 18px 40px #0007;position:relative;
+  background-image:repeating-linear-gradient(transparent 0 31px,#f3d7e3 31px 32px)}
+.paper h2{color:#c23a72;text-align:center;margin-top:0}
+.paper p{margin:0 0 14px;line-height:1.7;font-size:17.5px}
+.paper .tag{position:absolute;top:10px;right:16px;font-family:var(--hand);font-size:22px;color:#c23a72;transform:rotate(6deg)}
+.paper .rev{display:block;text-align:center;font-size:26px;height:0;opacity:0;transition:.8s;margin-bottom:0;letter-spacing:6px}
+.paper .rev.show{opacity:1;height:38px}
+.paper .sig{font-family:var(--hand);font-size:32px;color:#c23a72;margin-top:18px}
+.paper .guj{color:#c23a72;text-shadow:none;font-size:22px;text-align:center}
+.paper .en{text-align:center;font-family:var(--hand);font-size:24px;color:#c23a72}
+.hidden{opacity:0;pointer-events:none} .btn.hidden{transition:opacity 1s}
+/* ticket */
+.music-photo {
+  width: 180px;
+  height: 180px;
+  margin: 20px auto 25px;
+  padding: 8px;
+  background: #fff8fc;
+  border-radius: 14px;
+  transform: rotate(-3deg);
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  position: relative;
+}
 
+.music-photo::after {
+  content: "❤️";
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  font-size: 28px;
+  transform: rotate(10deg);
+}
+
+.music-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 9px;
+  display: block;
+}
+/* =====================================================
+   🎀 PRIYANSHI — THREE PHOTO STORY
+   ===================================================== */
+
+/* Give THIS screen enough horizontal space */
+.photo-story-screen .in {
+  width: 100%;
+  max-width: 1250px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   📸 THREE POLAROIDS
+   ===================================================== */
+
+.photo-story-screen .three-photo-story {
+  width: 100%;
+  max-width: 1120px;
+
+  margin: 35px auto 30px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(280px, 1fr));
+
+  gap: 35px;
+
+  align-items: start;
+  justify-content: center;
+
+  box-sizing: border-box;
+}
+
+
+/* Each card */
+.photo-story-screen .photo-card {
+  width: 100%;
+  max-width: 340px;
+
+  min-width: 0;
+
+  justify-self: center;
+
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   🖼️ POLAROID
+   ===================================================== */
+
+.photo-story-screen .photo-card .pol {
+  width: 100%;
+  max-width: 340px;
+
+  padding: 12px 12px 20px;
+
+  box-sizing: border-box;
+
+  background: #fffaf7;
+
+  box-shadow:
+    0 14px 32px rgba(0,0,0,.28),
+    0 4px 10px rgba(0,0,0,.12);
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease;
+}
+
+
+/* Cute scrapbook rotation */
+
+.photo-story-screen .us-card .pol {
+  transform: rotate(-3deg);
+}
+
+.photo-story-screen .beautiful-card .pol {
+  transform: rotate(0deg);
+}
+
+.photo-story-screen .funny-card .pol {
+  transform: rotate(3deg);
+}
+
+
+/* Hover */
+
+.photo-story-screen .us-card .pol:hover {
+  transform: rotate(-1deg) scale(1.04) translateY(-8px);
+}
+
+.photo-story-screen .beautiful-card .pol:hover {
+  transform: scale(1.04) translateY(-8px);
+}
+
+.photo-story-screen .funny-card .pol:hover {
+  transform: rotate(1deg) scale(1.04) translateY(-8px);
+}
+
+
+/* =====================================================
+   📷 IMAGE AREA
+   ===================================================== */
+
+.photo-story-screen .photo-card .ph {
+  width: 100%;
+
+  /*
+     MUCH WIDER / TALLER PHOTO AREA
+  */
+  height: 430px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f3e6ff;
+
+  box-sizing: border-box;
+}
+
+
+/*
+   Don't crop the photos.
+   Don't stretch them.
+*/
+.photo-story-screen .photo-card .ph img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  display: block;
+}
+
+
+/* =====================================================
+   💬 CAPTIONS
+   ===================================================== */
+
+.photo-story-screen .photo-card .cap {
+  padding-top: 14px;
+
+  color: #5b3a6b;
+
+  font-family: var(--hand);
+
+  font-size: 19px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.photo-story-screen .photo-card .cap small {
+  display: block;
+
+  margin-top: 6px;
+
+  font-family: var(--hand);
+
+  font-size: 11px;
+  font-weight: 500;
+
+  line-height: 1.4;
+
+  opacity: .72;
+}
+
+
+/* =====================================================
+   ❤️ MESSAGE
+   ===================================================== */
+
+.photo-story-screen .special-message {
+  width: 100%;
+  max-width: 700px;
+
+  margin: 15px auto 30px;
+
+  text-align: center;
+}
+
+.photo-story-screen .special-message .guj {
+  font-size: 21px;
+}
+
+.photo-story-screen .special-message p {
+  font-family: var(--hand);
+
+  font-size: 26px;
+
+  margin: 7px 0;
+
+  color: #ffd7e7;
+}
+
+.photo-story-screen .special-message span {
+  font-size: 13px;
+  opacity: .75;
+}
+
+
+/* =====================================================
+   💻 SMALL LAPTOP / TABLET
+   ===================================================== */
+
+@media (max-width: 1100px) {
+
+  .photo-story-screen .in {
+    max-width: 1000px;
+  }
+
+  .photo-story-screen .three-photo-story {
+    grid-template-columns:
+      repeat(3, minmax(220px, 1fr));
+
+    gap: 18px;
+  }
+
+  .photo-story-screen .photo-card {
+    max-width: 300px;
+  }
+
+  .photo-story-screen .photo-card .pol {
+    max-width: 300px;
+  }
+
+  .photo-story-screen .photo-card .ph {
+    height: 380px;
+  }
+}
+
+
+/* =====================================================
+   📱 MOBILE
+   ===================================================== */
+
+@media (max-width: 700px) {
+
+  .photo-story-screen .in {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .photo-story-screen .three-photo-story {
+    width: 96vw;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 7px;
+  }
+
+  .photo-story-screen .photo-card {
+    width: 100%;
+    max-width: none;
+  }
+
+  .photo-story-screen .photo-card .pol {
+    width: 100%;
+    max-width: none;
+
+    padding: 6px 6px 12px;
+  }
+
+  .photo-story-screen .photo-card .ph {
+    height: 230px;
+  }
+
+  .photo-story-screen .photo-card .cap {
+    font-size: 11px;
+    padding-top: 7px;
+  }
+
+  .photo-story-screen .photo-card .cap small {
+    font-size: 7px;
+  }
+
+  .photo-story-screen .special-message .guj {
+    font-size: 13px;
+  }
+
+  .photo-story-screen .special-message p {
+    font-size: 19px;
+  }
+}
+
+
+/* =====================================================
+   📱 VERY SMALL PHONES
+   ===================================================== */
+
+@media (max-width: 420px) {
+
+  .photo-story-screen .three-photo-story {
+    gap: 5px;
+  }
+
+  .photo-story-screen .photo-card .ph {
+    height: 190px;
+  }
+
+  .photo-story-screen .photo-card .pol {
+    padding: 4px 4px 9px;
+  }
+
+  .photo-story-screen .photo-card .cap {
+    font-size: 9px;
+  }
+
+  .photo-story-screen .photo-card .cap small {
+    font-size: 6px;
+  }
+}.ticket{background:var(--cream);color:var(--ink);border-radius:20px;padding:22px 18px;margin:14px 0;position:relative;text-align:left;box-shadow:0 14px 34px #0007;border:3px dashed var(--pink)}
+.ticket h3{font-family:var(--hand);font-size:34px;text-align:center;color:#c23a72}
+.ticket .n{text-align:center;font:700 22px var(--body);margin-bottom:10px}
+.ticket dt{font-size:12px;letter-spacing:.1em;color:#a06;margin-top:10px} .ticket dd{font-weight:700;margin:0;font-size:17px}
+.ok{font-family:var(--hand);font-size:38px;color:var(--pink);margin:8px 0}
+#cd{display:flex;gap:8px;justify-content:center;margin:10px 0}
+#cd div{background:#ffffff18;border-radius:14px;padding:8px 10px;min-width:64px} #cd b{font-size:24px;display:block} #cd small{font-size:11px;opacity:.7}
+.fall{position:fixed;top:-40px;z-index:50;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(540deg)}}
+#yay{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;font:700 clamp(44px,14vw,80px)/1.1 var(--hand);color:#fff;text-shadow:0 0 30px var(--pink);text-align:center;pointer-events:none;animation:in .6s}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important}}
+</style>
+</head>
+<body>
+<div id="bar"><i></i></div>
+<div id="bg"></div>
+
+<!-- 1 INTRO -->
+<section class="screen photo-story-screen"><div class="in">
+  <span class="cat" data-mood="shy"></span>
+  <h1>Hey Priyanshi... 🐱💗</h1>
+  <p class="sub">I have a tiny question for you...</p>
+  <p class="sub" style="font-size:14px">(psst, tap the cookie 🍪)</p>
+  <div id="ck" style="font-size:64px;cursor:pointer;user-select:none" onclick="crumb(this)">🍪</div>
+  <div class="toast" id="ckt"></div>
+  <button class="btn" onclick="go()">Open it 🐾</button>
+</div></section>
+
+<!-- 2 QUESTION -->
+<section class="screen"><div class="in">
+  <span class="cat" data-mood="shock"></span>
+  <h2>Priyanshi, are you free on 26 September? 👀</h2>
+  <p class="sub">Saturday, 26 September ❤️</p>
+  <button class="btn" onclick="ans('Cat says YES 🐱❤️')">Of course 🥺</button>
+  <button class="btn alt" onclick="ans('Are you sure? Think carefully... 👀 Okay okay, I\'ll convince you with cookies 🍪🐱')">Maybe... 👀</button>
+  <button class="btn cookie" onclick="ans('Cookie bribery activated 🍪 Too late, I already planned the day 😭')">Tell me more 🍪</button>
+  <div class="toast" id="qt"></div>
+</div></section>
+
+<!-- 3 WHERE -->
+<section class="screen"><div class="in">
+  <span class="cat sm" data-mood="happy"></span>
+  <h2>So... where are we going? 🐱</h2>
+  <p class="sub">Tap all of them 😉</p>
+  <!-- EDIT places here -->
+  <div class="grid" id="places">
+    <div class="card" data-t="Mall of Jaipur, first stop!"><b>🏬</b>Mall of Jaipur<br><small>First stop!</small></div>
+    <div class="card" data-t="Okay fine, you get McDonald's."><b>🍟</b>McDonald's<br><small>Because obviously.</small></div>
+    <div class="card" data-t="Chinese food was also inevitable. 🥢"><b>🥢</b>Chinese Food<br><small>Because we have to eat.</small></div>
+    <div class="card" data-t="Shopping was inevitable anyway. 🛍️"><b>🛍️</b>Shopping<br><small>Because why not? 😉</small></div>
+  </div>
+  <div class="toast" id="pt"></div>
+  <button class="btn hidden" id="pn" onclick="go()">Continue 🐾</button>
+</div></section>
+
+<!-- 4 PLAN -->
+<section class="screen"><div class="in">
+  <span class="cat sm" data-mood="love"></span>
+  <h2>Plan for the day?</h2>
+  <div class="chips" id="chips"></div>
+  <button class="btn" id="showplan" onclick="plan()">Show me the plan 🐱</button>
+  <div class="list" id="itin"></div>
+  <button class="btn hidden" id="planNext" onclick="go()">Next 🐾</button>
+</div></section>
+
+<!-- 5 PRIYANSHI -->
+<section class="screen">
+  <div class="in">
+
+    <h2>Somebody special 🎀</h2>
+
+    <p class="sub scrapbook-intro">
+      One beautiful girl... one annoying version... and one memory of us. 🐱❤️
+    </p>
+
+    <div class="three-photo-story">
+
+      <!-- OUR PHOTO — LEFT -->
+      <div class="photo-card us-card">
+        <div class="pol">
+          <div class="ph">
+            <img
+              src="assets/priyanshi3.jpg"
+              alt="Us together"
+              onerror="this.replaceWith('🚕❤️')"
+            >
+          </div>
+
+          <div class="cap">
+            Just us 🚕❤️
+            <small>
+              One of my favourite little memories.
+            </small>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- BEAUTIFUL PRIYANSHI — CENTRE -->
+      <div class="photo-card beautiful-card">
+        <div class="pol">
+          <div class="ph">
+            <img
+              src="assets/priyanshi1.jpg"
+              alt="Beautiful Priyanshi"
+              onerror="this.replaceWith('🌸')"
+            >
+          </div>
+
+          <div class="cap">
+            Pretty girl 🌸❤️
+            <small>
+              Okay... you are actually ridiculously beautiful.
+            </small>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- FUNNY PRIYANSHI — RIGHT -->
+      <div class="photo-card funny-card">
+        <div class="pol">
+          <div class="ph">
+            <img
+              src="assets/priyanshi2.jpg"
+              alt="Funny Priyanshi"
+              onerror="this.replaceWith('😭🐱')"
+            >
+          </div>
+
+          <div class="cap">
+            And then... THIS. 😭
+            <small>
+              Beautiful? Yes. Annoyable? Absolutely. 😂
+            </small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- PERSONAL MESSAGE -->
+    <div class="special-message">
+
+      <div class="guj">
+        પ્રિયાંશી, હું તને પ્રેમ કરું છું ❤️
+      </div>
+
+      <p>
+        You're my favourite person to annoy. 😭❤️
+      </p>
+
+      <span>
+        Sorry... someone has to keep you humble. 🐱🍪
+      </span>
+
+    </div>
+
+
+    <button class="btn" onclick="go()">
+      Next 🐾
+    </button>
+
+  </div>
+</section>
+
+<!-- 6 COLLAGE -->
+<section class="screen">
+  <div class="in">
+
+    <h2>Our little scrapbook 📸🐾</h2>
+    <p class="sub">A tiny collection of my favourite Priyanshi moments ❤️</p>
+
+    <div class="collage">
+
+      <!-- 1. Coffee -->
+      <div class="pol pol-tall" style="--r:-3deg">
+        <div class="ph">
+          <img src="assets/coffee.png" alt="Coffee tester" onerror="this.replaceWith('☕')">
+        </div>
+        <div class="cap">
+          Coffee Tester ☕
+          <small>Professional coffee inspector 😭</small>
+        </div>
+      </div>
+
+      <!-- 2. Eyes -->
+      <div class="pol pol-small" style="--r:4deg">
+        <div class="ph">
+          <img src="assets/eyes.png" alt="Cute eyes" onerror="this.replaceWith('👀')">
+        </div>
+        <div class="cap">
+          Cute Eyes 👀❤️
+          <small>I looked once. Big mistake.</small>
+        </div>
+      </div>
+
+      <!-- 3. Hair -->
+      <div class="pol pol-small" style="--r:-5deg">
+        <div class="ph">
+          <img src="assets/hair.png" alt="Nice hair" onerror="this.replaceWith('🎀')">
+        </div>
+        <div class="cap">
+          Nice Hair 🎀
+          <small>Okay hair, we get it. You're perfect.</small>
+        </div>
+      </div>
+
+      <!-- 4. Awkward -->
+      <div class="pol pol-tall" style="--r:3deg">
+        <div class="ph">
+          <img src="assets/awkward.png" alt="Awkward moment" onerror="this.replaceWith('😭')">
+        </div>
+        <div class="cap">
+          Awkward Moment 😭
+          <small>No context. No explanation. Just wrong place to sit.</small>
+        </div>
+      </div>
+
+      <!-- 5. Ice Cream / Kurti -->
+      <div class="pol pol-wide" style="--r:-2deg">
+        <div class="ph">
+          <img src="assets/icecream.png" alt="Kurti and ice cream" onerror="this.replaceWith('🍓🍦')">
+        </div>
+        <div class="cap">
+          Strawberry & Vanilla 🍓🍦
+          <small>Pink kurti = Strawberry and vanilla icecream = main-character energy.</small>
+        </div>
+      </div>
+
+      <!-- 6. Formal -->
+      <div class="pol pol-small" style="--r:5deg">
+        <div class="ph">
+          <img src="assets/formal.png" alt="Formal queen" onerror="this.replaceWith('👑')">
+        </div>
+        <div class="cap">
+          Formal Queen 👑
+          <small>Corporate by outfit, pookie by personality.</small>
+        </div>
+      </div>
+
+      <!-- 7. Kurti -->
+      <div class="pol pol-tall" style="--r:-4deg">
+        <div class="ph">
+          <img src="assets/kurti.jpg" alt="Kurti heroine" onerror="this.replaceWith('🌸')">
+        </div>
+        <div class="cap">
+          Kurti Heroine 🌸
+          <small>Somehow the heroine of my camera roll. ❤️</small>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="scrap-note">
+      🐱 <span>Warning:</span> excessive cuteness detected.
+    </div>
+
+    <button class="btn" onclick="go()">Next 🐾</button>
+
+  </div>
+</section>
+
+<!-- 7 MUSIC -->
+<section class="screen">
+  <div class="in">
+
+    <h2>One song for our day? 🎧❤️</h2>
+
+    <!-- Cute photo -->
+    <div class="music-photo">
+      <img
+        src="assets/music-photo.png"
+        alt="Our cute memory ❤️"
+        onerror="this.replaceWith('🐱❤️')"
+      >
+    </div>
+
+    <div class="player" id="pl">
+      <span class="cat" data-mood="happy"></span><br>
+
+      <button class="round" id="pp" onclick="toggleSong()">▶</button><br>
+
+      🔊
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step=".05"
+        value=".7"
+        oninput="if(au)au.volume=this.value;vol=this.value"
+      >
+
+      <div class="toast" id="mt" style="font-size:20px"></div>
+    </div>
+
+    <button class="btn" onclick="go()">
+      Okay, one last thing... 💌
+    </button>
+
+  </div>
+</section>
+
+
+<!-- 8 LETTER -->
+<section class="screen" id="letterScreen"><div class="in" style="max-width:480px">
+  <div id="pre">
+    <span class="cat" data-mood="shy"></span>
+    <h2>Before you go... 🐱</h2>
+    <div class="env" id="env" onclick="openEnv()"><div class="flap"></div><div class="seal">💗</div></div>
+    <button class="btn" onclick="openEnv()">Open your letter 💌</button>
+  </div>
+  <div id="letter">
+    <span class="cat sm" data-mood="love"></span>
+    <div class="paper">
+      <span class="tag">for you ❤️</span>
+      <h2>Dear Priyanshi, ❤️</h2>
+      <!-- EDIT the letter text here. data-e = little emoji shown after that paragraph -->
+      <p>As you know, when I first met you, I liked you. I liked your hair, your voice, and the way you looked. You were genuinely so beautiful to me.</p>
+      <p>Slowly and gradually, we started talking, and somehow we started talking A LOT. 😂<br>And honestly, I have to thank Manju Ma'am for that.</p>
+      <p>At that time, I knew I was just your friend, and honestly, I was happy being your friend. I genuinely liked having you around.</p>
+      <p>But slowly and gradually, things started changing.</p>
+      <p>I started feeling special whenever I was with you. Every moment I spent with you just felt so good.</p>
+      <p>There were literally times when I wouldn't feel tired, hungry, or even think about going to the washroom because I was just so involved in being around you. 😭</p>
+      <p>It was just... Priyanshi.</p>
+      <p data-e="🐱 ❤️">Then we went on our first day out together, and I was so happy just roaming around with you. And especially that pookie photo... 🥹❤️<br>That photo is honestly so cute.</p>
+      <p data-e="☕ 🍪 🌙">Then came our talks near the lakeside.<br>You eating cookies.<br>You drinking coffee.<br>Me gently kissing your cheek.<br>Everything about that moment felt so cute and peaceful. ❤️</p>
+      <p>And somewhere along the way, I started feeling that there was a real connection between us.<br>A close one.</p>
+      <p>I started noticing little things about you.<br>I saw how you think about everyone.<br>How you care about everyone.<br>How you are always ready to talk.<br>How you smile so much.<br>And how you usually don't show your frustration even when something is bothering you.</p>
+      <p>I also got to see the side of you that gets frustrated with certain people, and somehow even that side felt real and special because I was getting to know the actual you.</p>
+      <p>Then there were those moments when we would sit on the couples' bench and literally discuss every small detail of our lives.<br>I shared my emotions with you.<br>You shared yours with me.</p>
+      <p>And with you, I started showing my complete personality. I didn't feel like I had to hide parts of myself.</p>
+      <p>And just to be clear, it's not that I have any problem with your friends.<br>It's just that...<br>I want to spend time with YOU.<br>I want those moments with you.</p>
+      <p data-e="❤️ 🫶">Us walking around till night, hand in hand.<br>Those little conversations.<br>Those random moments.</p>
+      <p>Our previous date, especially the car ride when we came to Amity... that was genuinely so cool. I enjoyed that so much. 😂❤️</p>
+      <p>I shared my house situation with you.<br>I shared the whole Bhavya story with you.<br>I shared almost everything.<br>And somehow... you still didn't run away. 😭😂</p>
+      <p>All those cookies and coffees with you have become such special memories for me.</p>
+      <p>What made me feel even more special was that you actually took an interest in my life.<br>You listened.<br>You cared.<br>You were so cute and sweet about everything.</p>
+      <p>And I think that's when I realized that I had found a connection that I hadn't really felt before. So naturally... I started wanting to be closer to you.</p>
+      <p>You are just so sweet. And unlike what I usually feel around other people, I genuinely feel really good when I'm with you.</p>
+      <p data-e="✨">Also... your perfume smells SO GOOD. 😭<br>I swear I'm becoming addicted to it. 😂❤️</p>
+      <p>And then there are all the random little things.<br>All the movies we watched together.<br>Our lakeside conversations.<br>Talking about literally everything.<br>And you describing nachos in that funny way...<br>I still find that hilarious. 😭😂</p>
+      <p>When I look at everything together, I think of you as this cute, playful, cheerful, caring and wonderful person.</p>
+      <p>And somewhere along the way... I developed real feelings for you.</p>
+      <p>I don't know exactly when it happened.<br>Maybe it happened slowly.<br>Maybe it happened through all those coffees.<br>Maybe through the cookies.<br>Maybe through the walks.<br>Maybe through the late-night conversations.<br>Maybe through the way you listened to me.<br>Maybe through all those tiny moments that didn't seem important at the time.</p>
+      <p>But they became important to me.<br>You became important to me.</p>
+      <p>And I really, really hope that this time... my dream of having you by my side gets fulfilled.</p>
+      <p>Because honestly... I feel so complete when I'm with you.</p>
+      <p><b>I love you so much. ❤️</b></p>
+      <p>And whatever happens, I just wanted you to know how genuinely special you have become to me.</p>
+      <p>So... that's my little confession. 🥺❤️</p>
+      <p data-e="🐱 🍪 ❤️">Now come with me on 26 September.<br>We have cookies to eat, food to destroy, shopping to do, Chinese food to attack, and probably a lot of nonsense to talk about. 😂🐱🍪</p>
+      <div class="sig">With lots of love,<br>Pawan ❤️</div>
+      <div class="guj">પ્રિયાંશી, હું તને પ્રેમ કરું છું ❤️</div>
+      <div class="en">I love you, Priyanshi.</div>
+      <div style="text-align:center;font-size:34px;margin-top:10px">🍪</div>
+    </div>
+    <button class="btn hidden" id="endBtn" onclick="go()">Okay... now one last thing 🐱</button>
+    <div id="endMark" style="height:2px"></div>
+  </div>
+</div></section>
+
+<!-- 9 FINAL -->
+<section class="screen"><div class="in">
+  <span class="cat" data-mood="love"></span><span class="cat" data-mood="happy" style="transform:scaleX(-1)"></span>
+  <h1>IT'S A DATE! 💗</h1>
+  <!-- EDIT ticket details here -->
+  <div class="ticket">
+    <h3>DATE PASS 🎟️</h3><div class="n">PRIYANSHI ❤️</div>
+    <dl><dt>DATE</dt><dd>Saturday, 26 September 2026</dd>
+    <dt>TIME</dt><dd>8:00 AM – 6:00 PM</dd>
+    <dt>PLACE</dt><dd>📍 Mall of Jaipur</dd>
+    <dt>THEN</dt><dd>🍟 McDonald's<br>🥢 Chinese Food<br>🛍️ Shopping<br>✨ Enjoyment 😉</dd></dl>
+  </div>
+  <div class="ok">DATE CONFIRMED 💗</div>
+  <div id="cd"></div>
+  <p class="sub">See you on 26 September, Priyanshi ❤️<br>Come prepared for: food + shopping + cats + cookies + chaos 😭🐱🍪</p>
+  <p class="sub" style="font-family:var(--hand);font-size:28px">Deal? 🤝❤️</p>
+  <button class="btn" onclick="yes()">YES, I'LL BE THERE 🥺❤️</button>
+</div></section>
+<div id="yay">YAYYYYY!!!<br>🐱💗🍪</div>
+
+<script>
+/* ============ EDIT ME ============ */
+const SONG_URL = "assets/song.mp3";                 // your song file
+const DATE_TARGET = new Date(2026, 8, 26, 8, 0, 0); // 26 Sep 2026, 8:00 AM (month is 0-based: 8 = Sept)
+const PLAN_CHIPS = ["🛍️ Shopping","🍟 McDonald's","🍜 Chinese food","🐱 Cute photos","🍪 Cookies","😂 Random nonsense","✨ Enjoyment"];
+const ITINERARY = [
+  ["🏬","8:00 AM","Mall of Jaipur — first stop"],
+  ["🛍️","Later","Shopping (inevitable)"],
+  ["🍟","Then","McDonald's, obviously"],
+  ["🥢","Then","Chinese food attack"],
+  ["🐱","All day","Cute photos, cookies, nonsense & lots of enjoyment 😉"]
+];
+/* ================================== */
+
+// ---- cute cat drawer ----
+function cat(m){
+  const ink='#4a2a5a', eye={
+    happy:`<path d="M30 50q6-8 12 0M58 50q6-8 12 0" stroke="${ink}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`,
+    shy:`<circle cx="36" cy="50" r="3.5" fill="${ink}"/><circle cx="64" cy="50" r="3.5" fill="${ink}"/>`,
+    shock:`<circle cx="36" cy="50" r="8" fill="#fff"/><circle cx="64" cy="50" r="8" fill="#fff"/><circle cx="36" cy="50" r="3" fill="${ink}"/><circle cx="64" cy="50" r="3" fill="${ink}"/>`,
+    love:`<text x="27" y="58" font-size="18" fill="#e0245e">♥</text><text x="55" y="58" font-size="18" fill="#e0245e">♥</text>`
+  }[m];
+  const mouth = m==='shock' ? `<ellipse cx="50" cy="70" rx="4" ry="5" fill="${ink}"/>` : `<path d="M44 64q3 5 6 0q3 5 6 0" stroke="${ink}" stroke-width="2.5" fill="none" stroke-linecap="round"/>`;
+  return `<svg viewBox="0 0 100 90"><path d="M14 44L18 8 44 26Z M86 44L82 8 56 26Z" fill="#f4b6cf"/><path d="M21 34L23 18 34 26Z M79 34L77 18 66 26Z" fill="#ff8fb8"/>
+  <ellipse cx="50" cy="56" rx="40" ry="31" fill="#fff0f6"/>${eye}
+  <ellipse cx="24" cy="62" rx="7" ry="4.5" fill="#ff8fb8" opacity="${m==='shy'?.9:.5}"/><ellipse cx="76" cy="62" rx="7" ry="4.5" fill="#ff8fb8" opacity="${m==='shy'?.9:.5}"/>
+  <path d="M46 58h8l-4 4z" fill="#ff6fa5"/>${mouth}
+  <path d="M8 56l14 2M8 66l14-3M92 56l-14 2M92 66l-14-3" stroke="#c9b3ff" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M68 16l6 4 6-4-1 9-5-2-5 2z" fill="#e0245e"/></svg>`;
+}
+document.querySelectorAll('.cat').forEach(e=>e.innerHTML=cat(e.dataset.mood));
+
+// ---- floating background ----
+const bg=document.getElementById('bg');
+['🐾','❤️','✨','🍪','🎀','🐱','💗'].forEach((s,i)=>{for(let k=0;k<2;k++){
+  const e=document.createElement('span');e.textContent=s;
+  e.style.left=Math.random()*95+'%';e.style.fontSize=(16+Math.random()*16)+'px';
+  e.style.animationDuration=(14+Math.random()*14)+'s';e.style.animationDelay=(-Math.random()*20)+'s';bg.appendChild(e);}});
+
+// ---- screen flow ----
+const S=[...document.querySelectorAll('.screen')]; let cur=0;
+function show(i){S.forEach((s,k)=>s.classList.toggle('on',k===i));S[i].scrollTop=0;cur=i;
+  document.querySelector('#bar i').style.width=((i+1)/S.length*100)+'%';
+  if(i===7)resetLetter(); if(i===8)tick();}
+function go(){show(Math.min(cur+1,S.length-1));}
+show(0);
+
+// intro cookie
+let cc=0; function crumb(el){cc++;el.style.transform='scale(.8) rotate(-12deg)';setTimeout(()=>el.style.transform='',150);
+  document.getElementById('ckt').textContent=cc<3?'Nom 🍪 +'+cc:'Okay that\'s enough, cookie monster 😭';
+  rain(['🍪'],6);}
+
+// question
+function ans(t){document.getElementById('qt').textContent=t;rain(['🍪','❤️'],8);setTimeout(go,2200);}
+
+// where
+const picked=new Set();
+document.querySelectorAll('#places .card').forEach(c=>c.onclick=()=>{
+  c.classList.add('sel');picked.add(c);const t=document.getElementById('pt');
+  t.textContent=picked.size===4?"Basically... we're doing ALL of it 😭❤️":c.dataset.t;
+  if(picked.size===4)document.getElementById('pn').classList.remove('hidden');});
+
+// plan
+const ch=document.getElementById('chips');
+PLAN_CHIPS.forEach(t=>{const c=document.createElement('div');c.className='chip';c.textContent=t;c.onclick=()=>c.classList.toggle('sel');ch.appendChild(c);});
+function plan(){document.getElementById('showplan').style.display='none';
+  const l=document.getElementById('itin');
+  ITINERARY.forEach((r,i)=>{const d=document.createElement('div');d.style.animationDelay=i*.25+'s';d.innerHTML=`<b>${r[0]} ${r[1]}</b> — ${r[2]}`;l.appendChild(d);});
+  setTimeout(()=>document.getElementById('planNext').classList.remove('hidden'),ITINERARY.length*250+300);}
+
+// music
+let au=null,vol=.7;
+function toggleSong(){
+  if(!au){au=new Audio(SONG_URL);au.loop=true;au.volume=vol;
+    au.onerror=()=>{document.getElementById('mt').textContent='Add your song at assets/song.mp3 🎵';setPlay(false)};}
+  if(au.paused){au.play().then(()=>setPlay(true)).catch(()=>{document.getElementById('mt').textContent='Add your song at assets/song.mp3 🎵'});}
+  else{au.pause();setPlay(false);}}
+function setPlay(p){document.getElementById('pp').textContent=p?'⏸':'▶';document.getElementById('pl').classList.toggle('play',p);}
+
+// letter
+let obs;
+function resetLetter(){document.getElementById('pre').style.display='block';document.getElementById('letter').style.display='none';document.getElementById('env').classList.remove('open');}
+function openEnv(){
+  document.getElementById('env').classList.add('open');rain(['💗'],8);
+  setTimeout(()=>{document.getElementById('pre').style.display='none';document.getElementById('letter').style.display='block';
+    letterSetup();},1100);}
+function letterSetup(){
+  const sc=document.getElementById('letterScreen');sc.scrollTop=0;
+  if(obs)obs.disconnect();
+  document.querySelectorAll('.paper p[data-e]').forEach(p=>{if(!p.nextElementSibling.classList.contains('rev')){
+    const r=document.createElement('span');r.className='rev';r.textContent=p.dataset.e;p.after(r);}});
+  obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
+    if(e.target.classList.contains('rev'))e.target.classList.add('show');
+    if(e.target.id==='endMark')setTimeout(()=>document.getElementById('endBtn').classList.remove('hidden'),1500);}}),{root:sc,threshold:.6});
+  document.querySelectorAll('.rev').forEach(r=>obs.observe(r));obs.observe(document.getElementById('endMark'));}
+
+// countdown (uses the viewer's local time)
+let cdT;
+function tick(){clearInterval(cdT);const el=document.getElementById('cd');
+  const f=()=>{let d=DATE_TARGET-new Date();
+    if(d<=0){el.innerHTML='<b>It\'s date day!! 🐱💗</b>';return;}
+    const D=Math.floor(d/864e5),H=Math.floor(d%864e5/36e5),M=Math.floor(d%36e5/6e4),Sx=Math.floor(d%6e4/1e3);
+    el.innerHTML=[[D,'days'],[H,'hrs'],[M,'min'],[Sx,'sec']].map(x=>`<div><b>${x[0]}</b><small>${x[1]}</small></div>`).join('');};
+  f();cdT=setInterval(f,1000);}
+
+// celebration
+function rain(a,n){for(let i=0;i<n;i++){const e=document.createElement('div');e.className='fall';e.textContent=a[i%a.length];
+  e.style.left=Math.random()*95+'vw';e.style.fontSize=(20+Math.random()*24)+'px';
+  e.style.animationDuration=(2.5+Math.random()*2.5)+'s';e.style.animationDelay=Math.random()*.8+'s';
+  document.body.appendChild(e);setTimeout(()=>e.remove(),6500);}}
+function yes(){const y=document.getElementById('yay');y.style.display='flex';
+  rain(['🎉','💗','🐱','🍪','✨','❤️','🐾','🎀'],56);setTimeout(()=>y.style.display='none',3500);}
+</script>
+</body>
+</html>
